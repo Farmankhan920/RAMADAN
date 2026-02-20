@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌙 रमज़ान मुबारक</title>
+<meta property="og:title" content="🌙 रमज़ान मुबारक">
+<meta property="og:description" content="रमज़ान मुबारक - अपना नाम लिखकर दोस्तों को भेजें!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Devanagari:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #0a5c36;
+    --green-mid: #1a8c57;
+    --green-light: #2dbe7a;
+    --green-glow: #4ade97;
+    --gold: #f0c040;
+    --gold-light: #ffe07a;
+    --white: #ffffff;
+    --glass-bg: rgba(255,255,255,0.10);
+    --glass-border: rgba(255,255,255,0.25);
+    --glass-shadow: rgba(10,92,54,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 20% 10%, #0d7a4a 0%, #064028 40%, #021a10 100%);
+    overflow-x: hidden;
+    color: #fff;
+    position: relative;
+  }
+
+  /* ─── STARS ─── */
+  .stars-layer {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--del, 0s);
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.15; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.4); }
+  }
+
+  /* ─── FLOATING PARTICLES ─── */
+  .particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    font-size: 1.4rem;
+    animation: floatUp var(--fdur, 8s) ease-in-out infinite var(--fdel, 0s);
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+    20%  { opacity: 0.7; }
+    80%  { opacity: 0.4; }
+    100% { opacity: 0; transform: translateY(-100vh) rotate(360deg); }
+  }
+
+  /* ─── MOON ─── */
+  .moon-wrap {
+    position: fixed;
+    top: 30px; right: 40px;
+    z-index: 2;
+    animation: moonFloat 6s ease-in-out infinite;
+  }
+  @keyframes moonFloat {
+    0%,100% { transform: translateY(0) rotate(-5deg); }
+    50%      { transform: translateY(-18px) rotate(5deg); }
+  }
+  .moon {
+    width: 90px; height: 90px;
+    background: radial-gradient(circle at 35% 35%, #ffe07a, #f0c040 60%, #c8912a);
+    border-radius: 50%;
+    box-shadow: 0 0 40px 15px rgba(240,192,64,0.45), 0 0 80px 30px rgba(240,192,64,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .moon::after {
+    content: '';
+    position: absolute;
+    top: 8px; left: 18px;
+    width: 68px; height: 68px;
+    background: radial-gradient(circle at 70% 30%, #064028, transparent 60%);
+    border-radius: 50%;
+  }
+
+  /* ─── LANTERNS ─── */
+  .lantern {
+    position: fixed;
+    top: -10px;
+    width: 3px;
+    background: rgba(240,192,64,0.6);
+    z-index: 2;
+    transform-origin: top center;
+    animation: swingLantern 4s ease-in-out infinite;
+  }
+  .lantern-body {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px; height: 34px;
+    background: linear-gradient(135deg, rgba(255,224,122,0.9), rgba(240,140,30,0.7));
+    border-radius: 4px 4px 8px 8px;
+    border: 1.5px solid rgba(255,200,50,0.8);
+    box-shadow: 0 0 18px 8px rgba(255,180,0,0.45), inset 0 0 8px rgba(255,255,150,0.4);
+  }
+  .lantern-body::before {
+    content: '☪'; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 12px; color: rgba(10,50,20,0.8);
+  }
+  @keyframes swingLantern {
+    0%,100% { transform: rotate(-12deg); }
+    50%      { transform: rotate(12deg); }
+  }
+
+  /* ─── BLURRY GLOWS ─── */
+  .glow-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(70px);
+    pointer-events: none;
+    z-index: 0;
+    animation: blobPulse var(--bdur,8s) ease-in-out infinite var(--bdel,0s);
+  }
+  @keyframes blobPulse {
+    0%,100% { transform: scale(1) translateY(0); opacity: 0.35; }
+    50%      { transform: scale(1.2) translateY(-20px); opacity: 0.6; }
+  }
+
+  /* ─── MAIN CONTAINER ─── */
+  .container {
+    position: relative; z-index: 10;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-start;
+    padding: 20px 16px 40px;
+    gap: 0;
+  }
+
+  /* ─── HEADER CARD ─── */
+  .header-card {
+    width: 100%; max-width: 560px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 28px 24px 22px;
+    text-align: center;
+    box-shadow: 0 8px 40px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.25);
+    margin-top: 60px;
+    animation: cardEntrance 1s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    opacity: 0;
+  }
+  @keyframes cardEntrance {
+    from { opacity: 0; transform: translateY(40px) scale(0.92); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .arabic-text {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(240,192,64,0.6), 0 2px 4px rgba(0,0,0,0.4);
+    letter-spacing: 2px;
+    line-height: 1.2;
+    animation: shimmerText 3s ease-in-out infinite;
+  }
+  @keyframes shimmerText {
+    0%,100% { text-shadow: 0 0 30px rgba(240,192,64,0.6), 0 2px 4px rgba(0,0,0,0.4); }
+    50%      { text-shadow: 0 0 50px rgba(240,192,64,0.95), 0 0 100px rgba(240,192,64,0.4), 0 2px 4px rgba(0,0,0,0.4); }
+  }
+
+  .title-hindi {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 900;
+    color: #fff;
+    margin-top: 6px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+  }
+  .title-hindi span { color: var(--green-glow); }
+
+  .roza-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(240,192,64,0.22), rgba(240,192,64,0.08));
+    border: 1px solid rgba(240,192,64,0.5);
+    border-radius: 50px;
+    padding: 8px 22px;
+    margin-top: 14px;
+    font-size: clamp(0.95rem, 3vw, 1.15rem);
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.5px;
+  }
+  .roza-badge .emoji { font-size: 1.3em; }
+
+  .divider {
+    width: 80%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    margin: 16px auto;
+  }
+
+  .greeting-msg {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .greeting-msg strong { color: var(--green-glow); font-weight: 700; }
+
+  /* ─── NAME DISPLAY CARD ─── */
+  .name-display-card {
+    width: 100%; max-width: 560px;
+    background: linear-gradient(135deg, rgba(45,190,122,0.18), rgba(26,140,87,0.12));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(45,190,122,0.4);
+    border-radius: 22px;
+    padding: 20px 24px;
+    text-align: center;
+    margin-top: 16px;
+    animation: cardEntrance 1s 0.2s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    opacity: 0;
+    box-shadow: 0 4px 30px rgba(45,190,122,0.2);
+  }
+  .name-display {
+    font-size: clamp(1.4rem, 5vw, 2.1rem);
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(45,190,122,0.8);
+  }
+  .name-display .name-val {
+    color: var(--gold-light);
+    text-shadow: 0 0 25px rgba(240,192,64,0.7);
+  }
+  .sender-line {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ─── INPUT CARD ─── */
+  .input-card {
+    width: 100%; max-width: 560px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 24px 20px;
+    margin-top: 16px;
+    animation: cardEntrance 1s 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    opacity: 0;
+    box-shadow: 0 8px 40px var(--glass-shadow);
+  }
+  .input-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--green-glow);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .name-input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 1.05rem;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+    caret-color: var(--gold);
+  }
+  .name-input::placeholder { color: rgba(255,255,255,0.35); }
+  .name-input:focus {
+    border-color: var(--green-glow);
+    background: rgba(255,255,255,0.13);
+    box-shadow: 0 0 0 3px rgba(45,190,122,0.2), 0 0 20px rgba(45,190,122,0.15);
+  }
+
+  /* ─── BUTTONS ─── */
+  .btn-row {
+    display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;
+  }
+  .btn {
+    flex: 1; min-width: 130px;
+    padding: 14px 16px;
+    border: none; border-radius: 14px;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.25s ease;
+    position: relative; overflow: hidden;
+  }
+  .btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+  }
+  .btn:hover::after { background: rgba(255,255,255,0.12); }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(37,211,102,0.4);
+  }
+  .btn-whatsapp:hover { box-shadow: 0 6px 28px rgba(37,211,102,0.6); transform: translateY(-2px); }
+
+  .btn-copy {
+    background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.3);
+  }
+  .btn-copy:hover { background: linear-gradient(135deg, rgba(255,255,255,0.28), rgba(255,255,255,0.15)); transform: translateY(-2px); }
+
+  .btn-preview {
+    background: linear-gradient(135deg, var(--green-mid), var(--green-deep));
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(26,140,87,0.4);
+  }
+  .btn-preview:hover { box-shadow: 0 6px 28px rgba(26,140,87,0.6); transform: translateY(-2px); }
+
+  /* ─── SHARE TEXT PREVIEW ─── */
+  .share-preview {
+    width: 100%; max-width: 560px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-top: 14px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.82);
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  .share-preview.visible { display: block; }
+  .share-preview-title {
+    font-size: 0.75rem;
+    color: var(--green-glow);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: rgba(45,190,122,0.95);
+    color: #fff; padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 700; font-size: 0.95rem;
+    z-index: 9999;
+    box-shadow: 0 4px 20px rgba(45,190,122,0.5);
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s;
+    opacity: 0;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 28px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    animation: cardEntrance 1s 0.8s forwards; opacity: 0;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 480px) {
+    .moon-wrap { top: 16px; right: 16px; }
+    .moon { width: 65px; height: 65px; }
+    .header-card { margin-top: 44px; padding: 22px 18px 18px; }
+    .btn-row { flex-direction: column; }
+    .btn { min-width: unset; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars-layer" id="starsLayer"></div>
+
+<!-- Glow blobs -->
+<div class="glow-blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(45,190,122,0.5),transparent);top:-100px;left:-80px;--bdur:9s;--bdel:0s;"></div>
+<div class="glow-blob" style="width:350px;height:350px;background:radial-gradient(circle,rgba(240,192,64,0.3),transparent);top:40%;right:-80px;--bdur:11s;--bdel:2s;"></div>
+<div class="glow-blob" style="width:300px;height:300px;background:radial-gradient(circle,rgba(45,190,122,0.35),transparent);bottom:-60px;left:20%;--bdur:7s;--bdel:1s;"></div>
+
+<!-- Moon -->
+<div class="moon-wrap"><div class="moon"></div></div>
+
+<!-- Lanterns -->
+<div class="lantern" style="left:8%;height:100px;animation-duration:3.5s;animation-delay:0s;"><div class="lantern-body"></div></div>
+<div class="lantern" style="left:22%;height:80px;animation-duration:4.2s;animation-delay:0.8s;"><div class="lantern-body"></div></div>
+<div class="lantern" style="right:10%;height:90px;animation-duration:3.8s;animation-delay:0.3s;"><div class="lantern-body"></div></div>
+<div class="lantern" style="right:25%;height:70px;animation-duration:5s;animation-delay:1.2s;"><div class="lantern-body"></div></div>
+
+<!-- Floating particles -->
+<div id="particlesLayer"></div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- Header Card -->
+  <div class="header-card">
+    <div class="arabic-text">رَمَضَان مُبَارَك</div>
+    <div class="title-hindi">रमज़ान <span>मुबारक</span> 🌙</div>
+    <div class="roza-badge"><span class="emoji">🕌</span><span id="rozaBadgeText">आज का रोज़ा मुबारक हो</span></div>
+    <div class="divider"></div>
+    <div class="greeting-msg" id="mainGreeting">
+      अल्लाह आपके रोज़े, नमाज़ और इबादत को क़बूल फ़रमाए।<br>
+      यह रमज़ान आपके लिए <strong>बरकत, रहमत और मग़फ़िरत</strong> वाला हो।<br>
+      आमीन 🤲
+    </div>
+  </div>
+
+  <!-- Name Display Card (shown when name param in URL) -->
+  <div class="name-display-card" id="nameDisplayCard" style="display:none;">
+    <div class="name-display"><span class="name-val" id="senderNameDisplay"></span> की तरफ़ से</div>
+    <div class="name-display" style="font-size:1.1rem;margin-top:6px;">आपको रमज़ान मुबारक हो! 🌙</div>
+    <div class="sender-line">नीचे अपना नाम लिखकर आप भी भेजें ↓</div>
+  </div>
+
+  <!-- Input Card -->
+  <div class="input-card">
+    <label class="input-label">✨ अपना नाम लिखें</label>
+    <input class="name-input" id="nameInput" type="text" placeholder="जैसे: Farman, Fatima, Ahmad..." maxlength="40" autocomplete="off">
+    <div class="btn-row">
+      <button class="btn btn-whatsapp" onclick="shareWhatsApp()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp पर भेजें
+      </button>
+      <button class="btn btn-copy" onclick="copyLink()">
+        🔗 लिंक कॉपी करें
+      </button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-preview" onclick="togglePreview()">
+        👁️ मैसेज प्रीव्यू देखें
+      </button>
+    </div>
+  </div>
+
+  <!-- Share Preview -->
+  <div class="share-preview" id="sharePreview">
+    <div class="share-preview-title">📋 शेयर होने वाला मैसेज</div>
+    <div id="previewText"></div>
+  </div>
+
+  <div class="footer">
+    🌙 रमज़ान-उल-मुबारक 1447 हिजरी • बरकत, रहमत और मग़फ़िरत का महीना
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── STARS ───
+const starsLayer = document.getElementById('starsLayer');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*3+2).toFixed(1)}s;--del:-${(Math.random()*5).toFixed(1)}s;`;
+  starsLayer.appendChild(s);
+}
+
+// ─── PARTICLES ───
+const particlesLayer = document.getElementById('particlesLayer');
+const emojis = ['⭐','🌟','✨','🌙','☪️','🌺','🤲','💚','🕌','🌙'];
+for (let i = 0; i < 15; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  p.style.cssText = `left:${Math.random()*95}%;bottom:${Math.random()*10}%;--fdur:${(Math.random()*8+6).toFixed(1)}s;--fdel:-${(Math.random()*10).toFixed(1)}s;`;
+  particlesLayer.appendChild(p);
+}
+
+// ─── ROZA CALCULATION ───
+// Ramadan 2026: starts Feb 18, 2026
+const RAMADAN_START = new Date('2026-02-18T00:00:00');
+const RAMADAN_END   = new Date('2026-03-19T23:59:59');
+
+function getRozaInfo() {
+  const now = new Date();
+  if (now >= RAMADAN_START && now <= RAMADAN_END) {
+    const diff = Math.floor((now - RAMADAN_START) / (1000*60*60*24));
+    const roza = diff + 1;
+    const rozaWords = ['पहला','दूसरा','तीसरा','चौथा','पाँचवाँ','छठा','सातवाँ','आठवाँ','नौवाँ','दसवाँ',
+      'ग्यारहवाँ','बारहवाँ','तेरहवाँ','चौदहवाँ','पंद्रहवाँ','सोलहवाँ','सत्रहवाँ','अठारहवाँ','उन्नीसवाँ','बीसवाँ',
+      'इक्कीसवाँ','बाईसवाँ','तेईसवाँ','चौबीसवाँ','पच्चीसवाँ','छब्बीसवाँ','सत्ताईसवाँ','अट्ठाईसवाँ','उनतीसवाँ','तीसवाँ'];
+    const word = rozaWords[roza-1] || `${roza}वाँ`;
+    return { inRamadan: true, roza, word };
+  }
+  if (now < RAMADAN_START) return { inRamadan: false, before: true };
+  return { inRamadan: false, before: false };
+}
+
+const rozaInfo = getRozaInfo();
+const rozaBadge = document.getElementById('rozaBadgeText');
+if (rozaInfo.inRamadan) {
+  rozaBadge.textContent = `आज ${rozaInfo.word} रोज़ा मुबारक हो 🌙`;
+} else if (rozaInfo.before) {
+  rozaBadge.textContent = 'रमज़ान-उल-मुबारक की आमद मुबारक हो ☪️';
+} else {
+  rozaBadge.textContent = 'ईद-उल-फ़ित्र मुबारक हो 🎉';
+}
+
+// ─── URL PARAM: check if someone sent a link ───
+const urlParams = new URLSearchParams(window.location.search);
+const senderName = urlParams.get('name') ? decodeURIComponent(urlParams.get('name')) : '';
+
+if (senderName) {
+  document.getElementById('senderNameDisplay').textContent = senderName;
+  const card = document.getElementById('nameDisplayCard');
+  card.style.display = 'block';
+  // Pre-fill input
+  document.getElementById('nameInput').value = '';
+  // Play welcome sound
+  setTimeout(() => playChime(), 600);
+  // Confetti-like burst
+  setTimeout(() => burstParticles(), 800);
+}
+
+// ─── SOUND ───
+function playChime() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [523.25, 659.25, 783.99, 1046.5];
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq;
+      osc.type = 'sine';
+      const t = ctx.currentTime + i * 0.18;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.18, t + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+      osc.start(t); osc.stop(t + 0.6);
+    });
+  } catch(e) {}
+}
+
+function playSendSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [783.99, 1046.5, 1318.51];
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq;
+      osc.type = 'sine';
+      const t = ctx.currentTime + i * 0.12;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.15, t + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+      osc.start(t); osc.stop(t + 0.5);
+    });
+  } catch(e) {}
+}
+
+// ─── BURST PARTICLES ───
+function burstParticles() {
+  const bursts = ['🌟','✨','🌙','💚','⭐','🎉'];
+  for (let i = 0; i < 12; i++) {
+    const el = document.createElement('div');
+    el.textContent = bursts[Math.floor(Math.random()*bursts.length)];
+    el.style.cssText = `
+      position:fixed;pointer-events:none;z-index:9999;
+      font-size:${(Math.random()*1.5+1).toFixed(1)}rem;
+      left:${Math.random()*80+10}%;top:${Math.random()*60+10}%;
+      animation:burstFly 1.5s ease-out forwards;
+    `;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 1600);
+  }
+}
+const burstStyle = document.createElement('style');
+burstStyle.textContent = `@keyframes burstFly{0%{opacity:1;transform:translateY(0) scale(0.5);}100%{opacity:0;transform:translateY(-120px) scale(1.5);}}`;
+document.head.appendChild(burstStyle);
+
+// ─── BUILD SHARE TEXT ───
+function getName() {
+  return document.getElementById('nameInput').value.trim();
+}
+
+function buildShareLink(name) {
+  const base = window.location.origin + window.location.pathname;
+  return `${base}?name=${encodeURIComponent(name)}`;
+}
+
+function buildShareText(name) {
+  const link = buildShareLink(name);
+  let rozaLine = '';
+  if (rozaInfo.inRamadan) {
+    rozaLine = `\n🕌 आज का ${rozaInfo.word} रोज़ा मुबारक हो!`;
+  }
+  return `🌙 *رَمَضَان مُبَارَك*\n\n✨ ${name} की तरफ़ से आपको रमज़ान मुबारक हो!${rozaLine}\n\n🤲 अल्लाह आपके रोज़े, नमाज़ और इबादत क़बूल फ़रमाए। यह रमज़ान बरकत, रहमत और मग़फ़िरत वाला हो। आमीन!\n\n💚 अपना नाम लिखकर आप भी भेजें:\n👉 ${link}`;
+}
+
+// ─── WHATSAPP SHARE ───
+function shareWhatsApp() {
+  const name = getName();
+  if (!name) { showToast('⚠️ पहले अपना नाम लिखें!'); return; }
+  playSendSound();
+  burstParticles();
+  const text = buildShareText(name);
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+
+// ─── COPY LINK ───
+function copyLink() {
+  const name = getName();
+  if (!name) { showToast('⚠️ पहले अपना नाम लिखें!'); return; }
+  playSendSound();
+  const text = buildShareText(name);
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('✅ मैसेज और लिंक कॉपी हो गया!');
+    burstParticles();
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('✅ कॉपी हो गया!');
+  });
+}
+
+// ─── PREVIEW TOGGLE ───
+let previewVisible = false;
+function togglePreview() {
+  const name = getName();
+  if (!name) { showToast('⚠️ पहले अपना नाम लिखें!'); return; }
+  previewVisible = !previewVisible;
+  const el = document.getElementById('sharePreview');
+  if (previewVisible) {
+    document.getElementById('previewText').textContent = buildShareText(name);
+    el.classList.add('visible');
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    el.classList.remove('visible');
+  }
+}
+
+// ─── UPDATE PREVIEW ON INPUT ───
+document.getElementById('nameInput').addEventListener('input', () => {
+  if (previewVisible) {
+    const name = getName();
+    if (name) document.getElementById('previewText').textContent = buildShareText(name);
+  }
+});
+
+// ─── TOAST ───
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ─── PLAY AMBIENT CHIME ON LOAD ───
+document.addEventListener('click', function playOnce() {
+  playChime();
+  document.removeEventListener('click', playOnce);
+}, { once: true });
+</script>
+</body>
+</html>
